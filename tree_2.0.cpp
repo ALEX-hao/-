@@ -22,22 +22,22 @@ class tree
 {
 public:
 	bond<T> *root = NULL;
-	bond<T> *queue_tree_bond[100];						//用于储存节点指针的队列
-	int flag_tree_queue = -1;							//节点指针队列的标识符
-	bond<T> *stack_tree_bond[100];						//节点栈
-	int top_tree_stack = -1;							//节点栈的栈帧
-	int numptr_tree_array = 0;							//读取输入数组数据的标志符，数字指针
-	void in_queue(bond<T> *ptr);						//把节点压入队列
-	bond<T> *out_queue();								//把节点弹出队列
-	void bulid_tree(T *u, int a);						//建树
-	void print_tree();									//层序输出树的内容
+	bond<T> *queue_tree_bond[100];					//用于储存节点指针的队列
+	int flag_tree_queue = -1;					//节点指针队列的标识符
+	bond<T> *stack_tree_bond[100];					//节点栈
+	int top_tree_stack = -1;					//节点栈的栈帧
+	int numptr_tree_array = 0;					//读取输入数组数据的标志符，数字指针
+	void in_queue(bond<T> *ptr);					//把节点压入队列
+	bond<T> *out_queue();						//把节点弹出队列
+	void bulid_tree(T *u, int a);					//建树
+	void print_tree();						//层序输出树的内容
 	void mid_order_tree(T *u, bond<T> *p);				//中序输入数据到树中
-	void mid_print_tree(bond<T> *p);					//中序遍历并输出树中数据
+	void mid_print_tree(bond<T> *p);				//中序遍历并输出树中数据
 	bond<T> *find_tree_bond(T a, bond<T> *p);			//查找制定的数据返回对应节点地址
 	bond<T> *insert_tree_bond(T a, bond<T> *p);			//按搜索树顺序来插入一个节点
-	void push_stack(bond<T> *ptr);						//节点入栈
-	bond<T> *pop_stack();								//节点弹出
-	void mid_input_tree(T *u);							//用栈实现中序输入节点
+	void push_stack(bond<T> *ptr);					//节点入栈
+	bond<T> *pop_stack();						//节点弹出
+	void mid_input_tree(T *u);					//用栈实现中序输入节点
 };
 template <typename T>
 void tree<T>::bulid_tree(T *u, int a)					//建树并初始化各个节点的值
@@ -54,8 +54,8 @@ void tree<T>::bulid_tree(T *u, int a)					//建树并初始化各个节点的值
 	{
 		queue_tree_bond[i] = NULL;
 	}
-	flag_tree_queue = -1;								//清空队列后注意要把队列标志置空
-	while (p->left == NULL && p->right == NULL)			//给节点增加左右儿子
+	flag_tree_queue = -1;							//清空队列后注意要把队列标志置空
+	while (p->left == NULL && p->right == NULL)				//给节点增加左右儿子
 	{
 		bond<T> *s1 = new bond<T>;
 		bond<T> *s2 = new bond<T>;
@@ -64,13 +64,13 @@ void tree<T>::bulid_tree(T *u, int a)					//建树并初始化各个节点的值
 		p->left = s1;
 		p->right = s2;
 		in_queue(p->left); in_queue(p->right);
-		p = out_queue();								//把左右儿子的指针装入队列反复生成新节点到预定的个数
+		p = out_queue();						//把左右儿子的指针装入队列反复生成新节点到预定的个数
 		if (amount_tree >= a) break;
 	}
-	numptr_tree_array = 0;								//将传入数组标志置零队列
+	numptr_tree_array = 0;							//将传入数组标志置零队列
 }
 template <typename T>
-void tree<T>::in_queue(bond<T> *ptr)					//把节点压入队列
+void tree<T>::in_queue(bond<T> *ptr)						//把节点压入队列
 {
 	queue_tree_bond[++flag_tree_queue] = ptr;
 }
@@ -102,7 +102,7 @@ bond<T> *tree<T>::pop_stack()							//将节点从栈中弹出
 }
 template <typename T>
 void tree<T>::mid_input_tree(T *u)						//用栈实现中序输入节点
-{														//这里不想用递归，递归会导致数组的标志无法置零，影响后续使用
+{									//这里不想用递归，递归会导致数组的标志无法置零，影响后续使用
 	numptr_tree_array = 0;
 	bond<T> *p = root;
 	while (p || stack_tree_bond[top_tree_stack])
