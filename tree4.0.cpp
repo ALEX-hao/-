@@ -1,7 +1,6 @@
 // DataStructure Tree.cpp
 // 二叉树链式存储的第4次实现
-// 已实现 队列-层序建立树、打印树 ；栈-递归-中序赋值、打印 ；递归查找、删除 计算树中节点的高度、清零高度
-
+// 已实现 队列-层序建立树、打印树 ; 栈-递归-中序赋值、打印 ; 递归查找、删除 ; 计算树中节点的高度、清零高度
 // 新增：计算树中节点的高度、清零高度
 
 #include "pch.h"
@@ -22,11 +21,6 @@ public:
 	~bond() { amount_tree--; }
 };
 
-int max(int a, int b)
-{
-	if (a > b) return a;
-	else return b;
-}
 
 template <typename T>
 class tree
@@ -60,6 +54,8 @@ public:
 
 	int count_tree_high(bond<T> *ptr);					//计算树中节点的高度
 	void set_tree_height_0(bond<T> *p);					//将节点的height高度值归零
+	int max(int a, int b)
+	{if (a > b) return a;else return b;}
 };
 template <typename T>
 void tree<T>::bulid_tree(T *u, int a)					//建树并初始化各个节点的值
@@ -128,7 +124,6 @@ void tree<T>::mid_input_tree(T *u)						//用栈实现中序输入节点
 {														//这里不想用递归，递归会导致数组的标志无法置零，影响后续使用
 	numptr_tree_array = 0;
 	bond<T> *p = root;
-	cout << "fuck!!!!!!!!!!!!!!!" << endl;
 	while (p || (top_tree_stack > -1))
 	{
 		while (p)
@@ -157,7 +152,7 @@ void tree<T>::print_tree()								//层序输出树的内容
 	bond<T> *p = root;
 	while (p != NULL)
 	{
-		cout << p <<'\t'<<p->height<< '\t' << p->data << endl;
+		cout << p << '\t' << p->height << '\t' << p->data << endl;
 		if (p->left != NULL) in_queue(p->left);
 		if (p->right != NULL) in_queue(p->right);
 		p = out_queue();
